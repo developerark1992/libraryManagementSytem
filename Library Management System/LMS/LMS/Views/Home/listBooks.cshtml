@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LMS.Models.Book>
+
+@{
+    ViewBag.Title = "listBooks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Books</h2>
+
+<p>
+    @Html.ActionLink("Create New", "addBook")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BarcodeNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationMembers)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BarcodeNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISBN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationMembers)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "updateBook", new { id=item.BookID }) |
+            @Html.ActionLink("Delete", "deleteBook", new { id=item.BookID })
+        </td>
+    </tr>
+}
+
+</table>

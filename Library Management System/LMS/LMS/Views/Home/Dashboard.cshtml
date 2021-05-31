@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Dashboard</h2>
+</br>
+<h1>Welcome @Session["name"] </h1>
+
+@*<button class="btn-primary">Add Authors</button>
+<button class="btn-primary">Add Books</button>*@
+
+<div class="form-group">
+
+    <a href='@Url.Action("addAuthor", "Home")'>
+        <input type="button" value="Add Author" />
+    </a>
+</div>
+
+<div class="form-group">
+    <a href='@Url.Action("addBook", "Home")'>
+        <input type="button" value="Add Book" />
+    </a>
+
+</div>
+
+<div class="form-group">
+    <a href='@Url.Action("listAuthor", "Home")'>
+        <input type="button" value="List Authors" />
+    </a>
+
+</div>
+
+<div class="form-group">
+    <a href='@Url.Action("addDepartment", "Home")'>
+        <input type="button" value="Add Department" />
+    </a>
+
+</div>
+
+<div class="form-group">
+    <a href='@Url.Action("addFaculty", "Home")'>
+        <input type="button" value="Add Faculty" />
+    </a>
+
+</div>
+
+<div class="form-group">
+    <a href='@Url.Action("addCourse", "Home")'>
+        <input type="button" value="Add Course" />
+    </a>
+
+</div>
+<div class="form-group">
+    <a href='@Url.Action("Logout", "Home")'>
+        <input type="button" value="Logout" />
+    </a>
+
+</div>
+
+
+

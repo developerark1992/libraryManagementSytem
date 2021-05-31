@@ -1,0 +1,34 @@
+﻿@model IEnumerable<LMS.Models.Faculty>
+
+@{
+    ViewBag.Title = "viewFaculty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Faculties</h2>
+
+<p>
+    @Html.ActionLink("Create New", "addFaculty")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FacultyName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FacultyName)
+        </td>
+        <td>
+
+         
+            @Html.ActionLink("Delete", "deleteFaculty", new { id=item.FacultyID })
+        </td>
+    </tr>
+}
+
+</table>

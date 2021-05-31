@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="aID" />
+    </Key>
+    <Property Name="aID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminUsername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdminPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Chapters" Relationship="Self.FK__Chapters__Author__3B75D760" FromRole="Authors" ToRole="Chapters" />
+    <NavigationProperty Name="Publishers" Relationship="Self.FK__Publisher__Autho__412EB0B6" FromRole="Authors" ToRole="Publishers" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BarcodeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PublicationMembers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Chapters" Relationship="Self.FK__Chapters__BookID__3C69FB99" FromRole="Book" ToRole="Chapters" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK__Course__BookID__3D5E1FD2" FromRole="Book" ToRole="Course" />
+    <NavigationProperty Name="Printings" Relationship="Self.FK__Printings__BookI__403A8C7D" FromRole="Book" ToRole="Printings" />
+    <NavigationProperty Name="Publishers" Relationship="Self.FK__Publisher__BookI__4222D4EF" FromRole="Book" ToRole="Publishers" />
+    <NavigationProperty Name="Publishers1" Relationship="Self.FK__Publisher__BookI__4316F928" FromRole="Book" ToRole="Publishers" />
+    <NavigationProperty Name="Royalties" Relationship="Self.FK__Royalty__BookID__440B1D61" FromRole="Book" ToRole="Royalty" />
+    <NavigationProperty Name="Stocks" Relationship="Self.FK__Stock__BookID__44FF419A" FromRole="Book" ToRole="Stock" />
+  </EntityType>
+  <EntityType Name="Chapter">
+    <Key>
+      <PropertyRef Name="ChpID" />
+    </Key>
+    <Property Name="ChpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="ChapterNumber" Type="Int32" />
+    <Property Name="ChapterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AuthorID" Type="Int32" />
+    <NavigationProperty Name="Author" Relationship="Self.FK__Chapters__Author__3B75D760" FromRole="Chapters" ToRole="Authors" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Chapters__BookID__3C69FB99" FromRole="Chapters" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FacultyID" Type="Int32" />
+    <Property Name="DepartmentID" Type="Int32" />
+    <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Course__BookID__3D5E1FD2" FromRole="Course" ToRole="Book" />
+    <NavigationProperty Name="Department" Relationship="Self.FK__Course__Departme__3E52440B" FromRole="Course" ToRole="Department" />
+    <NavigationProperty Name="Faculty" Relationship="Self.FK__Course__FacultyI__3F466844" FromRole="Course" ToRole="Faculty" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DeptID" />
+    </Key>
+    <Property Name="DeptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DeptName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK__Course__Departme__3E52440B" FromRole="Department" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="FacultyID" />
+    </Key>
+    <Property Name="FacultyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacultyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK__Course__FacultyI__3F466844" FromRole="Faculty" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="Printing">
+    <Key>
+      <PropertyRef Name="PrintID" />
+    </Key>
+    <Property Name="PrintID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="PDate" Type="DateTime" Precision="0" />
+    <Property Name="Number_of_Pages" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Printings__BookI__403A8C7D" FromRole="Printings" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Publisher">
+    <Key>
+      <PropertyRef Name="PubID" />
+    </Key>
+    <Property Name="PubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="AuthorID" Type="Int32" />
+    <Property Name="BeginningChapters" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastChapters" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Author" Relationship="Self.FK__Publisher__Autho__412EB0B6" FromRole="Publishers" ToRole="Authors" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Publisher__BookI__4222D4EF" FromRole="Publishers" ToRole="Book" />
+    <NavigationProperty Name="Book1" Relationship="Self.FK__Publisher__BookI__4316F928" FromRole="Publishers" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Royalty">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="R_Date" Type="DateTime" Precision="0" />
+    <Property Name="Pointer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Coefficient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Addition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TextType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Royalty__BookID__440B1D61" FromRole="Royalty" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Set">
+    <Key>
+      <PropertyRef Name="SetID" />
+    </Key>
+    <Property Name="SetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="SID" />
+    </Key>
+    <Property Name="SID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookID" Type="Int32" />
+    <Property Name="EntranceDate" Type="DateTime" Precision="0" />
+    <Property Name="ExitDate" Type="DateTime" Precision="0" />
+    <Property Name="Unit" Type="Int32" />
+    <Property Name="Explanation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Book" Relationship="Self.FK__Stock__BookID__44FF419A" FromRole="Stock" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Title">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="Int32" Nullable="false" />
+    <Property Name="Title1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__Chapters__Author__3B75D760">
+    <End Role="Authors" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Chapters" Type="Self.Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Chapters">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Publisher__Autho__412EB0B6">
+    <End Role="Authors" Type="Self.Author" Multiplicity="0..1" />
+    <End Role="Publishers" Type="Self.Publisher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Publishers">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chapters__BookID__3C69FB99">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Chapters" Type="Self.Chapter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Chapters">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__BookID__3D5E1FD2">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Printings__BookI__403A8C7D">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Printings" Type="Self.Printing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Printings">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Publisher__BookI__4222D4EF">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Publishers" Type="Self.Publisher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Publishers">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Publisher__BookI__4316F928">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Publishers" Type="Self.Publisher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Publishers">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Royalty__BookID__440B1D61">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Royalty" Type="Self.Royalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Royalty">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Stock__BookID__44FF419A">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__Departme__3E52440B">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DeptID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__FacultyI__3F466844">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+    <End Role="Course" Type="Self.Course" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="FacultyID" />
+      </Principal>
+      <Dependent Role="Course">
+        <PropertyRef Name="FacultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LMSEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Authors" EntityType="Self.Author" />
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="Chapters" EntityType="Self.Chapter" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="Departments" EntityType="Self.Department" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+    <EntitySet Name="Printings" EntityType="Self.Printing" />
+    <EntitySet Name="Publishers" EntityType="Self.Publisher" />
+    <EntitySet Name="Royalties" EntityType="Self.Royalty" />
+    <EntitySet Name="Sets" EntityType="Self.Set" />
+    <EntitySet Name="Stocks" EntityType="Self.Stock" />
+    <EntitySet Name="Titles" EntityType="Self.Title" />
+    <AssociationSet Name="FK__Chapters__Author__3B75D760" Association="Self.FK__Chapters__Author__3B75D760">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Chapters" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Publisher__Autho__412EB0B6" Association="Self.FK__Publisher__Autho__412EB0B6">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Publishers" EntitySet="Publishers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chapters__BookID__3C69FB99" Association="Self.FK__Chapters__BookID__3C69FB99">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Chapters" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__BookID__3D5E1FD2" Association="Self.FK__Course__BookID__3D5E1FD2">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Printings__BookI__403A8C7D" Association="Self.FK__Printings__BookI__403A8C7D">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Printings" EntitySet="Printings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Publisher__BookI__4222D4EF" Association="Self.FK__Publisher__BookI__4222D4EF">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Publishers" EntitySet="Publishers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Publisher__BookI__4316F928" Association="Self.FK__Publisher__BookI__4316F928">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Publishers" EntitySet="Publishers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Royalty__BookID__440B1D61" Association="Self.FK__Royalty__BookID__440B1D61">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Royalty" EntitySet="Royalties" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Stock__BookID__44FF419A" Association="Self.FK__Stock__BookID__44FF419A">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Stock" EntitySet="Stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__Departme__3E52440B" Association="Self.FK__Course__Departme__3E52440B">
+      <End Role="Department" EntitySet="Departments" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__FacultyI__3F466844" Association="Self.FK__Course__FacultyI__3F466844">
+      <End Role="Faculty" EntitySet="Faculties" />
+      <End Role="Course" EntitySet="Courses" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

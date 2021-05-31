@@ -1,0 +1,33 @@
+﻿@model LMS.Models.Admin
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<h1>Login as Administrator</h1>
+
+
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+        {
+        <div class="form-group">
+
+            @Html.TextBoxFor(x => x.AdminUsername, new { @class = "form-control", @Placeholder = "Admin Username" })
+        </div>
+
+        <div class="form-group">
+
+            @Html.PasswordFor(x => x.AdminPassword, new { @class = "form-control", @Placeholder = "Admin Password" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-primary">Login</button>
+
+        </div>
+
+
+
+           
+            <h2>@ViewBag.msg</h2>
+
+
+
+        }

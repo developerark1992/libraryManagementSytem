@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admins">
+    <Key>
+      <PropertyRef Name="aID" />
+    </Key>
+    <Property Name="aID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminUsername" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdminPassword" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Authors">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="BarcodeNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="ISBN" Type="nvarchar" MaxLength="50" />
+    <Property Name="PublicationMembers" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Chapters">
+    <Key>
+      <PropertyRef Name="ChpID" />
+    </Key>
+    <Property Name="ChpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookID" Type="int" />
+    <Property Name="ChapterNumber" Type="int" />
+    <Property Name="ChapterName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AuthorID" Type="int" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookID" Type="int" />
+    <Property Name="CourseName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FacultyID" Type="int" />
+    <Property Name="DepartmentID" Type="int" />
+    <Property Name="Class" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="DeptID" />
+    </Key>
+    <Property Name="DeptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DeptName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Faculties">
+    <Key>
+      <PropertyRef Name="FacultyID" />
+    </Key>
+    <Property Name="FacultyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FacultyName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Printings">
+    <Key>
+      <PropertyRef Name="PrintID" />
+    </Key>
+    <Property Name="PrintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookID" Type="int" />
+    <Property Name="PDate" Type="datetime" />
+    <Property Name="Number_of_Pages" Type="int" />
+  </EntityType>
+  <EntityType Name="Publishers">
+    <Key>
+      <PropertyRef Name="PubID" />
+    </Key>
+    <Property Name="PubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookID" Type="int" />
+    <Property Name="AuthorID" Type="int" />
+    <Property Name="BeginningChapters" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastChapters" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Royalties">
+    <Key>
+      <PropertyRef Name="RID" />
+    </Key>
+    <Property Name="RID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookID" Type="int" />
+    <Property Name="R_Date" Type="datetime" />
+    <Property Name="Pointer" Type="nvarchar" MaxLength="50" />
+    <Property Name="Coefficient" Type="nvarchar" MaxLength="50" />
+    <Property Name="Addition" Type="nvarchar" MaxLength="50" />
+    <Property Name="TextType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Sets">
+    <Key>
+      <PropertyRef Name="SetID" />
+    </Key>
+    <Property Name="SetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SetName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Stocks">
+    <Key>
+      <PropertyRef Name="SID" />
+    </Key>
+    <Property Name="SID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookID" Type="int" />
+    <Property Name="EntranceDate" Type="datetime" />
+    <Property Name="ExitDate" Type="datetime" />
+    <Property Name="Unit" Type="int" />
+    <Property Name="Explanation" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Titles">
+    <Key>
+      <PropertyRef Name="TitleID" />
+    </Key>
+    <Property Name="TitleID" Type="int" Nullable="false" />
+    <Property Name="Title1" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Chapters__Author__3B75D760">
+    <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+    <End Role="Chapters" Type="Self.Chapters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Chapters">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chapters__BookID__3C69FB99">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Chapters" Type="Self.Chapters" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Chapters">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__BookID__3D5E1FD2">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__Departme__3E52440B">
+    <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departments">
+        <PropertyRef Name="DeptID" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="DepartmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Course__FacultyI__3F466844">
+    <End Role="Faculties" Type="Self.Faculties" Multiplicity="0..1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculties">
+        <PropertyRef Name="FacultyID" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="FacultyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Printings__BookI__403A8C7D">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Printings" Type="Self.Printings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Printings">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Publisher__Autho__412EB0B6">
+    <End Role="Authors" Type="Self.Authors" Multiplicity="0..1" />
+    <End Role="Publishers" Type="Self.Publishers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Authors">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Publishers">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Publisher__BookI__4222D4EF">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Publishers" Type="Self.Publishers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Publishers">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Publisher__BookI__4316F928">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Publishers" Type="Self.Publishers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Publishers">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Royalty__BookID__440B1D61">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Royalties" Type="Self.Royalties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Royalties">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Stock__BookID__44FF419A">
+    <End Role="Books" Type="Self.Books" Multiplicity="0..1" />
+    <End Role="Stocks" Type="Self.Stocks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Books">
+        <PropertyRef Name="BookID" />
+      </Principal>
+      <Dependent Role="Stocks">
+        <PropertyRef Name="BookID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LMSModelStoreContainer">
+    <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chapters" EntityType="Self.Chapters" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Printings" EntityType="Self.Printings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Publishers" EntityType="Self.Publishers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Royalties" EntityType="Self.Royalties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sets" EntityType="Self.Sets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Titles" EntityType="Self.Titles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Chapters__Author__3B75D760" Association="Self.FK__Chapters__Author__3B75D760">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Chapters" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chapters__BookID__3C69FB99" Association="Self.FK__Chapters__BookID__3C69FB99">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Chapters" EntitySet="Chapters" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__BookID__3D5E1FD2" Association="Self.FK__Course__BookID__3D5E1FD2">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__Departme__3E52440B" Association="Self.FK__Course__Departme__3E52440B">
+      <End Role="Departments" EntitySet="Departments" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Course__FacultyI__3F466844" Association="Self.FK__Course__FacultyI__3F466844">
+      <End Role="Faculties" EntitySet="Faculties" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Printings__BookI__403A8C7D" Association="Self.FK__Printings__BookI__403A8C7D">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Printings" EntitySet="Printings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Publisher__Autho__412EB0B6" Association="Self.FK__Publisher__Autho__412EB0B6">
+      <End Role="Authors" EntitySet="Authors" />
+      <End Role="Publishers" EntitySet="Publishers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Publisher__BookI__4222D4EF" Association="Self.FK__Publisher__BookI__4222D4EF">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Publishers" EntitySet="Publishers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Publisher__BookI__4316F928" Association="Self.FK__Publisher__BookI__4316F928">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Publishers" EntitySet="Publishers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Royalty__BookID__440B1D61" Association="Self.FK__Royalty__BookID__440B1D61">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Royalties" EntitySet="Royalties" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Stock__BookID__44FF419A" Association="Self.FK__Stock__BookID__44FF419A">
+      <End Role="Books" EntitySet="Books" />
+      <End Role="Stocks" EntitySet="Stocks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
